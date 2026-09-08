@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guía del profesional · Red CEPT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --mint:#eefaf7;
+    --teal:#109c8c;
+    --teal-deep:#0a5f55;
+    --lime:#c6f24e;
+    --ink:#10312c;
+    --muted:#52706b;
+    --line:#d3e9e4;
+    --ochre:#9a5f06;
+    --ochre-bg:#fdf4e3;
+    --rail:19rem;
+    --medida:72ch;
+    --display:"Bricolage Grotesque",Georgia,serif;
+    --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--mint);color:var(--ink);
+    font-family:var(--body);font-size:17px;line-height:1.62;
+  }
+  .skip{
+    position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;
+    padding:.6rem 1rem;z-index:20;border-radius:0 0 6px 0;
+  }
+  .skip:focus{left:0}
+
+  /* ---------- índice lateral ---------- */
+  .rail{
+    position:fixed;inset:0 auto 0 0;width:var(--rail);
+    background:var(--teal-deep);color:#dff5f1;
+    display:flex;flex-direction:column;
+    padding:1.9rem 0 1.2rem;overflow-y:auto;
+  }
+  .mark{padding:0 1.6rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.16)}
+  .mark b{
+    display:block;font-family:var(--display);font-weight:700;
+    font-size:1.42rem;line-height:1.1;letter-spacing:-.01em;color:#fff;
+  }
+  .mark span{display:block;margin-top:.3rem;font-size:.9rem;color:#9dd5cd}
+  .find{padding:1.1rem 1.6rem .4rem}
+  .find input{
+    width:100%;padding:.55rem .7rem;border-radius:7px;
+    border:1px solid rgba(255,255,255,.22);
+    background:rgba(255,255,255,.08);color:#fff;
+    font-family:var(--body);font-size:.94rem;
+  }
+  .find input::placeholder{color:#8cc4bc}
+  .find input:focus{outline:2px solid var(--lime);outline-offset:1px}
+  nav{padding:.7rem 0 0}
+  nav h2{
+    margin:1.1rem 0 .35rem;padding:0 1.6rem;
+    font-family:var(--body);font-size:.82rem;font-weight:600;
+    color:#8cc4bc;letter-spacing:.01em;
+  }
+  nav a{
+    display:flex;gap:.65rem;align-items:baseline;
+    padding:.4rem 1.6rem;color:#dff5f1;text-decoration:none;font-size:.95rem;
+  }
+  nav a i{
+    font-style:normal;color:#7fbdb4;font-variant-numeric:tabular-nums;
+    font-size:.84rem;min-width:1.1rem;
+  }
+  nav a:hover{background:rgba(255,255,255,.07);color:#fff}
+  nav a:focus-visible{outline:2px solid var(--lime);outline-offset:-2px}
+  nav a[aria-current="true"]{
+    background:var(--teal);color:#fff;font-weight:600;
+    box-shadow:inset 4px 0 0 var(--lime);
+  }
+  nav a[aria-current="true"] i{color:#d7f8c9}
+  .empty{padding:.5rem 1.6rem;font-size:.9rem;color:#8cc4bc}
+
+  /* ---------- contenido ---------- */
+  main{margin-left:var(--rail);padding:3.2rem 3rem 5rem;max-width:64rem}
+  .num{
+    font-family:var(--display);font-weight:700;font-size:1rem;
+    color:var(--teal);letter-spacing:.02em;
+  }
+  h1{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(1.9rem,4.2vw,2.7rem);line-height:1.08;
+    letter-spacing:-.02em;margin:.15rem 0 1.4rem;max-width:30ch;
+  }
+  main h2{
+    font-family:var(--display);font-weight:500;
+    font-size:1.3rem;line-height:1.25;margin:2.6rem 0 .7rem;
+    padding-top:1.1rem;border-top:1px solid var(--line);
+  }
+  p,li{max-width:var(--medida)}
+  p{margin:0 0 1rem}
+  a.inline{color:var(--teal-deep);text-decoration-thickness:1px;text-underline-offset:2px}
+
+  dl{margin:0 0 1.2rem;max-width:var(--medida)}
+  dt{font-weight:600;margin-top:.85rem}
+  dd{margin:.1rem 0 0;color:var(--muted)}
+
+  ol.pasos{margin:0 0 1.4rem;padding:0;list-style:none;counter-reset:p}
+  ol.pasos li{counter-increment:p;position:relative;padding:0 0 .95rem 2.5rem}
+  ol.pasos li::before{
+    content:counter(p);position:absolute;left:0;top:.1rem;
+    width:1.65rem;height:1.65rem;border-radius:50%;
+    background:var(--teal);color:#fff;display:grid;place-items:center;
+    font-size:.86rem;font-weight:600;font-variant-numeric:tabular-nums;
+  }
+  /* solo el título del paso va en su propio renglón */
+  ol.pasos > li > b:first-child{display:block}
+
+  .nota{
+    margin:1.5rem 0;padding:1rem 1.2rem;max-width:var(--medida);
+    background:#f4fce6;border-left:5px solid var(--lime);border-radius:0 8px 8px 0;
+  }
+  .nota b:first-child{display:block;font-weight:600;margin-bottom:.25rem}
+  .nota p:last-child{margin-bottom:0}
+
+  .coord{
+    margin:1.2rem 0;padding:.85rem 1.1rem;max-width:var(--medida);
+    background:#e7f6f3;border-left:5px solid var(--teal);border-radius:0 8px 8px 0;
+    color:var(--teal-deep);
+  }
+  .coord p:last-child{margin-bottom:0}
+
+  /* espacio de captura: marcador mientras el archivo no existe */
+  .captura{
+    margin:1.4rem 0;max-width:var(--medida);padding:1.8rem 1rem;
+    border:2px dashed var(--teal);border-radius:10px;
+    background:rgba(16,156,140,.05);text-align:center;
+    color:var(--teal-deep);font-size:.93rem;
+  }
+  .captura b{display:block;font-weight:600}
+  .captura code{font-family:var(--body);font-size:.86rem;color:var(--muted)}
+  /* captura ya disponible */
+  .captura-lista{margin:1.4rem 0;max-width:var(--medida)}
+  .captura-lista img{
+    display:block;width:100%;height:auto;
+    border:1px solid var(--line);border-radius:10px;background:#fff;
+  }
+  .captura-lista figcaption{
+    margin-top:.45rem;font-size:.88rem;color:var(--muted);
+  }
+
+  .pendiente{
+    display:inline-block;margin:.5rem 0 1rem;padding:.5rem .8rem;
+    max-width:var(--medida);background:var(--ochre-bg);color:var(--ochre);
+    border-radius:7px;font-size:.9rem;
+  }
+  .pendiente b{font-weight:600}
+
+  footer.rev{
+    margin-top:3.4rem;padding-top:1rem;border-top:1px solid var(--line);
+    font-size:.88rem;color:var(--muted);
+  }
+
+  .railtoggle{display:none}
+
+  @media (max-width:900px){
+    :root{--rail:0px}
+    .rail{position:static;width:auto;padding:1.4rem 0 .6rem}
+    .rail nav,.rail .find{display:none}
+    .rail.open nav,.rail.open .find{display:block}
+    .mark{padding-bottom:1.1rem}
+    .railtoggle{
+      display:block;margin:1.1rem 1.6rem 0;padding:.55rem .9rem;
+      background:var(--teal);color:#fff;border:0;border-radius:7px;
+      font-family:var(--body);font-size:.95rem;font-weight:600;cursor:pointer;
+    }
+    main{margin-left:0;padding:2.2rem 1.4rem 3.5rem}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    nav a{transition:background .12s ease}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#contenido">Ir al contenido</a>
+
+<aside class="rail" id="rail">
+  <div class="mark">
+    <b>Guía del profesional</b>
+    <span>Red CEPT</span>
+  </div>
+  <button class="railtoggle" id="toggle" aria-expanded="false">Ver el índice</button>
+  <div class="find">
+    <label class="skip" for="q">Buscar en la guía</label>
+    <input id="q" type="search" placeholder="Buscar: receta, agenda, alta…" autocomplete="off">
+  </div>
+  <nav id="nav" aria-label="Índice de la guía"></nav>
+</aside>
+
+<main id="contenido">
+  <article id="pagina"></article>
+</main>
+
+<script>
+const REV = "septiembre 2026";
+
+/* Espacio de captura. Si existe capturas/<archivo>, se muestra la imagen.
+   Si todavía no está, se muestra el marcador punteado con el nombre esperado. */
+function cap(archivo, alt){
+  return '<figure class="captura" data-src="capturas/' + archivo + '" data-alt="' +
+    alt + '"><b>Captura pendiente</b><code>capturas/' + archivo + '</code></figure>';
+}
+
+const PAGINAS = [
+{
+  id:"bienvenida", num:1, grupo:"Común a todas las especialidades",
+  titulo:"Bienvenida y contactos",
+  claves:"bienvenida contacto gestora firma incorporacion facturacion auditoria prestadores whatsapp",
+  cuerpo:`
+  <p>Esta guía reúne lo que necesitás para comenzar a trabajar con el sistema
+  CEPT. Las primeras páginas aplican a todas las especialidades, pero también
+  vas a encontrar información específica por especialidad.</p>
+
+  <h2>Tu firma</h2>
+  <p>Al momento del alta de tu usuario te vamos a pedir la imagen de tu firma,
+  para que quede cargada en el sistema y se inserte de forma automática en cada
+  consulta que registrás.</p>
+
+  <h2>La gestora de tus casos</h2>
+  <p>Cada profesional tiene una gestora asignada. Es tu punto de contacto para
+  todas tus consultas administrativas. A modo de ejemplo:</p>
+  <ul>
+    <li>Problemas para ingresar al sistema.</li>
+    <li>Cambio de modalidad de atención de un paciente.</li>
+    <li>Traslado de un paciente.</li>
+    <li>Alta de un paciente.</li>
+    <li>Consultas sobre dictámenes y tiempos de tratamiento.</li>
+    <li>Necesidades de agenda: disponibilidad, vacaciones.</li>
+    <li>Cualquier consulta que tengas sobre el tratamiento de un paciente.</li>
+  </ul>
+  <p>Además, toda consulta que cargás es validada por la gestora del caso. Podés
+  ver el detalle en <a class="inline" href="#/reglas">Reglas operativas</a>.</p>
+
+  <h2>Contactos</h2>
+  <dl>
+    <dt>Gestión de prestadores y facturación</dt>
+    <dd>WhatsApp +54 9 11 4198-5413 · rrhh@cept.com.ar</dd>
+    <dt>Auditoría médica</dt>
+    <dd>+54 9 11 2887-8250</dd>
+  </dl>
+  `
+},
+{
+  id:"ingreso", num:2, grupo:"Común a todas las especialidades",
+  titulo:"Ingreso al sistema",
+  claves:"ingreso login usuario contrasena credenciales acceso olvide clave iniciar sesion",
+  cuerpo:`
+  <p>Trabajamos a través de nuestra web: <a class="inline" href="https://www.cept.com.ar" target="_blank" rel="noopener">www.cept.com.ar</a></p>
+  <p>Las credenciales de acceso se envían al momento del alta de tu usuario, por
+  correo electrónico o por WhatsApp, una vez recibida la información solicitada.</p>
+
+  <ol class="pasos">
+    <li><b>Iniciar sesión</b>
+      En la parte superior de la web, ingresá a <b>Iniciar sesión</b>.</li>
+    <li><b>Ingresar tus datos</b>
+      Ingresá usuario y contraseña, y seleccioná <b>Aceptar</b>.</li>
+  </ol>
+
+  ${cap("ingreso-login.png","Pantalla de inicio de sesión del sistema CEPT")}
+
+  <div class="nota">
+    <b>Si no podés ingresar</b>
+    <p>Si olvidaste la contraseña, tu usuario dejó de funcionar o el sistema no
+    acepta tus credenciales, comunicate con tu gestora.</p>
+  </div>
+  `
+},
+{
+  id:"pendientes", num:3, grupo:"Común a todas las especialidades",
+  titulo:"Pendientes de evolución",
+  claves:"pendientes evolucion pantalla inicial ver ficha historia clinica reagendar",
+  cuerpo:`
+  <p>Es la primera pantalla que se abre al ingresar. Acá vas a encontrar el
+  listado de los pacientes cuyo turno ya ocurrió y cuya evolución todavía está
+  pendiente de carga.</p>
+
+  ${cap("pendientes-listado.png","Listado de pacientes con evolución pendiente")}
+
+  <h2>Los botones de cada turno</h2>
+  <dl>
+    <dt>Ver ficha</dt>
+    <dd>Muestra los datos del paciente: DNI, teléfono, descripción del siniestro.</dd>
+    <dt>Ver historia clínica</dt>
+    <dd>Muestra el historial clínico del paciente, formado por las evaluaciones y consultas que tuvo desde el inicio del tratamiento.</dd>
+    <dt>Cargar evolución</dt>
+    <dd>Si el paciente se presentó, registrás la evolución de la sesión.</dd>
+    <dt>Paciente no se presentó a la consulta</dt>
+    <dd>Registra la ausencia del paciente. Ver <a class="inline" href="#/reagendar">Reagendar turno y ausencia</a>.</dd>
+    <dt>Reagendar turno</dt>
+    <dd>Propone un nuevo día y horario para el turno. Es de uso excepcional. Ver <a class="inline" href="#/reagendar">Reagendar turno y ausencia</a>.</dd>
+  </dl>
+  `
+},
+{
+  id:"agenda", num:4, grupo:"Común a todas las especialidades",
+  titulo:"Mi agenda y videollamadas",
+  claves:"agenda turnos dia videollamada link virtual whatsapp modalidad comenzar camara microfono",
+  cuerpo:`
+  <p>En <b>Mi agenda</b> vas a ver los turnos programados para el día que estés
+  consultando. Por defecto se muestran los del día actual, y podés avanzar al
+  día siguiente y así sucesivamente.</p>
+  <p>Desde acá accedés a los mismos botones que en
+  <a class="inline" href="#/pendientes">Pendientes de evolución</a>. Si el turno
+  del día que estás consultando ya está evolucionado, vas a ver el mensaje
+  <b>Turno evolucionado</b>.</p>
+
+  ${cap("agenda-dia.png","Vista de Mi agenda con los turnos del día")}
+
+  <h2>Turnos virtuales</h2>
+  <p>En los turnos virtuales aparecen botones adicionales para usar el sistema
+  de videollamadas integrado del CEPT:</p>
+  <dl>
+    <dt>Comenzar</dt>
+    <dd>Abre la pantalla de videollamada para iniciar la atención. La primera vez que ingreses vas a tener que darle acceso a la cámara y al micrófono en el navegador. Si tenés dudas con eso, podés contactarnos para que te ayudemos.</dd>
+    <dt>Copiar link de la videollamada (profesional)</dt>
+    <dd>Copia tu link para abrirlo en otra pestaña o dispositivo, si así lo necesitás.</dd>
+    <dt>Copiar link de la videollamada (paciente)</dt>
+    <dd>Copia el link del paciente.</dd>
+  </dl>
+  <p>El paciente recibe su link de forma automática, así que no necesitás
+  enviárselo. La opción de copiar su link está disponible por si no lo recibió
+  o te lo solicita por algún motivo.</p>
+
+  <div class="nota">
+    <b>Si el turno es virtual y no ves los botones</b>
+    <p>Los botones de videollamada aparecen solo cuando el paciente tiene
+    configurado que puede realizar videollamadas mediante este sistema. Si no
+    aparecen, el paciente está configurado para atenderse por WhatsApp, según
+    sus posibilidades tecnológicas o de comprensión.</p>
+  </div>
+
+  <h2>Modalidad de atención</h2>
+  <p>La modalidad la define el equipo de gestión al cargar el turno, y en
+  algunos casos la determina la ART.</p>
+  <div class="coord">
+    <p>Si considerás que otra modalidad es más adecuada para la evolución del
+    tratamiento, planteáselo a la gestora del caso.</p>
+  </div>
+  `
+},
+{
+  id:"evolucion", num:5, grupo:"Común a todas las especialidades",
+  titulo:"Cargar evolución",
+  claves:"cargar evolucion evolutivo editor 24 horas firma prestacion psicodiagnostico evaluacion",
+  cuerpo:`
+  <p>La pantalla de carga es la misma para todas las consultas de tratamiento.
+  Lo que cambia es el encabezado, que refleja la prestación que el equipo de
+  gestión agendó para ese turno: consulta psiquiátrica, consulta psicológica,
+  rehabilitación neurocognitiva, psicodiagnóstico, control anual y otras
+  evaluaciones.</p>
+
+  ${cap("evolucion-editor.png","Editor de carga de evolución")}
+
+  <div class="nota">
+    <p>La gestora siempre te va a consultar si estás en conocimiento de ciertos
+    tipos de evaluaciones. Si te encontrás con una evolución que no sabés
+    completar, comunicate con tu gestora para que te brinde mayor información.</p>
+  </div>
+
+  <h2>Qué ves en la pantalla al evolucionar una consulta</h2>
+  <dl>
+    <dt>Evolución anterior</dt>
+    <dd>El último informe cargado del paciente, en la parte superior. Es de consulta, no se edita.</dd>
+    <dt>Evolución que estás cargando</dt>
+    <dd>El editor donde registrás el evolutivo de la consulta.</dd>
+    <dt>Firma</dt>
+    <dd>Se completa de forma automática con tu firma y tu nombre. No tenés que hacer nada.</dd>
+    <dt>Fecha de la consulta y próximo turno</dt>
+    <dd>Ver <a class="inline" href="#/proximo-turno">Agendar próximo turno desde la evolución</a>.</dd>
+  </dl>
+
+  <div class="nota">
+    <b>Plazo y contenido</b>
+    <p>Registrá la evolución dentro de las primeras 24 horas de ocurrido el
+    turno. Debe contener la sintomatología relacionada al siniestro del
+    paciente.</p>
+  </div>
+
+  <p>Si sos psiquiatra, la misma pantalla incluye dos secciones adicionales:
+  ver <a class="inline" href="#/plan-farmacologico">Plan farmacológico y receta digital</a>.</p>
+  `
+},
+{
+  id:"proximo-turno", num:6, grupo:"Común a todas las especialidades",
+  titulo:"Agendar próximo turno desde la evolución",
+  claves:"proximo turno fecha proxima consulta sin definir traslado ultima consulta dictamen srt modalidad",
+  cuerpo:`
+  <p>Al comienzo de la evolución se registran la fecha de la consulta y los
+  datos del próximo turno.</p>
+
+  ${cap("proximo-turno-campos.png","Campos de fecha, modalidad, traslado y última consulta")}
+
+  <ol class="pasos">
+    <li><b>Fecha de la consulta</b>
+      Cargá la fecha en la que ocurrió la consulta.</li>
+    <li><b>Fecha próxima consulta</b>
+      El campo no es obligatorio. Si acordaste día y horario con el paciente,
+      cargalos. Si no pudiste acordarlo, marcá la casilla
+      <b>Fecha Próxima Consulta sin definir</b>. En algunos casos, la agenda del
+      próximo turno la coordina el equipo de gestión de CEPT, y vas a ser
+      informado de eso.</li>
+    <li><b>La consulta será virtual o presencial</b>
+      El sistema propone por defecto la última modalidad utilizada.</li>
+    <li><b>El paciente requiere traslado</b>
+      Solo para pacientes que tienen secuelas físicas vinculables al siniestro.</li>
+    <li><b>¿Es esta la última consulta?</b>
+      Seleccioná <b>Sí</b> únicamente cuando estás otorgando el alta al paciente.</li>
+  </ol>
+
+  <div class="coord">
+    <p>El cambio de modalidad, el traslado y el alta se coordinan previamente
+    con la gestora del caso. Podés modificar el campo y conversarlo con ella:
+    es la gestora quien valida el cambio y confirma cómo queda cargado el turno.</p>
+  </div>
+
+  <h2>Tiene dictamen</h2>
+  <p>Indica si existe una resolución emitida por la SRT para ese paciente. El
+  dictamen puede determinar, por ejemplo, la frecuencia del tratamiento y las
+  fechas de cumplimiento. Podés consultar el documento en esa misma sección, y
+  ante cualquier duda hablar con tu gestora.</p>
+  `
+},
+{
+  id:"reagendar", num:7, grupo:"Común a todas las especialidades",
+  titulo:"Reagendar turno y ausencia del paciente",
+  claves:"reagendar ausencia no se presento observacion cambio de fecha",
+  cuerpo:`
+  <p>Son dos acciones distintas y se usan en momentos distintos.</p>
+
+  <h2>Paciente que no se presentó a la consulta</h2>
+  <p>Se usa el mismo día del turno, cuando el paciente no asiste. Al
+  seleccionarlo se carga automáticamente una observación con un mensaje de
+  ausencia. Al presionar <b>Aceptar</b>, queda guardado.</p>
+
+  ${cap("ausencia-observacion.png","Pantalla de observación por ausencia del paciente")}
+
+  <h2>Reagendar turno</h2>
+  <p>Genera una observación indicando que el turno no se atenderá y propone un
+  nuevo día y horario.</p>
+  <div class="coord">
+    <p>Es de uso excepcional para el profesional. Si necesitás no atender un
+    turno ya agendado, coordinalo con la gestora del caso.</p>
+  </div>
+  `
+},
+{
+  id:"firma-alta", num:8, grupo:"Común a todas las especialidades",
+  titulo:"Firma digital del alta",
+  claves:"alta firma qr link formulario paciente presencial virtual videollamada art",
+  cuerpo:`
+  <p>Cuando corresponde dar el alta a un paciente, el equipo de gestión arma el
+  formulario de alta y te avisa que está disponible.</p>
+
+  <h2>Alta presencial</h2>
+  <p>En el turno de la agenda del día aparece el botón
+  <b>Mostrar QR para la firma del alta</b>. Al presionarlo se abre una ventana
+  con el código QR y un botón para copiar el link.</p>
+
+  <ol class="pasos">
+    <li><b>Compartir el QR o el link</b>
+      Mostrale el QR en pantalla para que lo escanee con la cámara de su
+      celular, o compartile el link.</li>
+    <li><b>El paciente revisa el formulario</b>
+      Accede a <b>Ver formulario</b> y puede visualizarlo antes de firmar.</li>
+    <li><b>El paciente firma</b>
+      Firma con el dedo en el pad digital. El campo de texto viene con su
+      nombre y apellido prellenados, y puede editarlo o dejar observaciones o
+      descargos. Confirma con <b>Firmar</b>.</li>
+    <li><b>Queda registrado</b>
+      El formulario se adjunta automáticamente al historial del paciente y se
+      envía a la ART. El paciente puede descargarlo o compartirlo por el canal
+      que prefiera.</li>
+  </ol>
+
+  ${cap("alta-qr-firma.png","Ventana con el código QR para la firma del alta")}
+
+  <h2>Alta virtual</h2>
+  <p>No requiere firma del paciente. El formulario se emite con la constancia de
+  que el alta fue otorgada por videollamada.</p>
+
+  <div class="nota">
+    <b>Si el paciente no firma durante la consulta</b>
+    <p>Avisale a la gestora del caso. El formulario de alta queda pendiente de
+    firma y ella coordina cómo continuar.</p>
+  </div>
+  `
+},
+{
+  id:"historia-clinica", num:9, grupo:"Común a todas las especialidades",
+  titulo:"Historia clínica y ficha del paciente",
+  claves:"historia clinica ficha paciente editar caso opciones ver historial",
+  cuerpo:`
+  <p>La historia clínica se consulta desde la ficha del paciente, a la que
+  accedés con <b>Editar caso</b> desde el listado de casos activos.</p>
+  <p>También podés abrirla directamente con el botón <b>Ver historia clínica</b>
+  desde cualquier turno, en Pendientes de evolución o en Mi agenda. Y además la
+  podés consultar desde la misma pantalla de evolución, mientras estás cargando
+  la información de un paciente que ya atendiste, con el botón
+  <b>Ver historial</b>.</p>
+
+  ${cap("ficha-opciones.png","Menú de opciones de la ficha del paciente")}
+  `
+},
+{
+  id:"casos", num:10, grupo:"Común a todas las especialidades",
+  titulo:"Casos activos y casos cerrados",
+  claves:"casos activos cerrados pacientes tratamiento alta buscar dni siniestro filtro",
+  cuerpo:`
+  <h2>Casos activos</h2>
+  <p>Los pacientes que se encuentran en tratamiento y que tuvieron un turno
+  asignado con vos. Podés buscarlos por letra inicial, por DNI, número de
+  siniestro o nombre completo.</p>
+
+  ${cap("casos-activos.png","Listado de casos activos")}
+
+  <h2>Casos cerrados</h2>
+  <p>Los pacientes que fueron dados de alta. Si el caso fue cerrado en una fecha
+  anterior, seleccioná correctamente ese filtro antes de buscar.</p>
+
+  ${cap("casos-cerrados.png","Listado de casos cerrados con el filtro de fecha")}
+  `
+},
+{
+  id:"prestaciones", num:11, grupo:"Común a todas las especialidades",
+  titulo:"Prestaciones por mes y facturación",
+  claves:"prestaciones mes facturacion factura cuit razon social honorarios plazo whatsapp",
+  cuerpo:`
+  <p>En <b>Prestaciones por mes</b> podés consultar las sesiones que atendiste
+  durante el mes que selecciones, y ver los datos necesarios para emitir la
+  factura.</p>
+
+  ${cap("prestaciones-mes.png","Pantalla de prestaciones por mes")}
+
+  <h2>Datos para facturar</h2>
+  <dl>
+    <dt>Razón social</dt>
+    <dd>Red CEPT SA</dd>
+    <dt>CUIT</dt>
+    <dd>30-71470845-3</dd>
+    <dt>Enviar la factura a</dt>
+    <dd>rrhh@cept.com.ar, o por WhatsApp al +54 9 11 4198-5413</dd>
+  </dl>
+
+  <div class="nota">
+    <b>Plazo</b>
+    <p>En lo posible, enviá la factura antes del día 10 de cada mes. Ante
+    cualquier duda, podés hablar con facturación.</p>
+  </div>
+  `
+},
+{
+  id:"reglas", num:12, grupo:"Común a todas las especialidades",
+  titulo:"Reglas operativas",
+  claves:"reglas validacion gestora 24 horas art historia clinica certificados medicamentos inculpable especialidades",
+  cuerpo:`
+  <p>Información que vale la pena tener presente desde el primer día.</p>
+
+  <h2>Validación de la gestora</h2>
+  <p>Toda consulta que cargás es validada por la gestora del caso. Hasta que la
+  validación ocurre, la consulta no impacta en la historia clínica ni se envía a
+  la ART.</p>
+
+  <h2>Plazo de carga</h2>
+  <p>Registrá la evolución dentro de las primeras 24 horas de ocurrido el turno.</p>
+
+  <h2>Contenido del evolutivo</h2>
+  <p>Debe contener la sintomatología consecuente al siniestro del paciente,
+  omitiendo de esta manera incorporar contenido de tipo inculpable.</p>
+
+  <h2>Certificados, medicamentos y otras especialidades</h2>
+  <p>Desde el CEPT no emitimos certificados para el paciente. Cualquier consulta
+  por medicamentos, o reclamos a la ART por otras especialidades, deben ser
+  canalizados con su ART.</p>
+  <div class="coord">
+    <p>Si tenés alguna duda sobre cómo abordar una situación así, comunicásela a
+    tu gestora.</p>
+  </div>
+  `
+},
+{
+  id:"plan-farmacologico", num:13, grupo:"Psiquiatría",
+  titulo:"Plan farmacológico y receta digital",
+  claves:"plan farmacologico receta digital farmaco sintoma target presentacion marca alerta domicilio farmacia",
+  cuerpo:`
+  <p>Estas dos secciones aparecen dentro de la pantalla de carga de evolución
+  psiquiátrica.</p>
+
+  <h2>Plan farmacológico</h2>
+  <p>Desde el desplegable buscás los fármacos que necesitás recetar. Al
+  seleccionar <b>Agregar</b>, el fármaco queda asignado al plan del paciente.</p>
+  <p>Después de agregarlo, establecés la cantidad recetada para cada período del
+  día y cargás los síntomas target asociados a esa medicación.</p>
+
+  ${cap("plan-farmacologico.png","Sección de plan farmacológico con dosis y síntomas target")}
+
+  <h2>Receta digital</h2>
+  <p>Cargado el plan farmacológico, es posible generar una receta digital desde
+  la misma pantalla de evolución, con el botón <b>Generar nueva receta</b>.</p>
+  <p>Al presionar ese botón, se abre una pantalla con los fármacos del plan
+  vigente cargados por defecto, donde seleccionás la presentación de cada uno.</p>
+
+  <dl>
+    <dt>Fecha de la última receta</dt>
+    <dd>El sistema muestra la fecha de la última prescripción del paciente, con el fin de evitar generar una receta cuando aún cuenta con fármacos disponibles.</dd>
+    <dt>Presentación</dt>
+    <dd>El sistema calcula una recomendación según la dosis cargada en el plan farmacológico, que debe ser verificada por el profesional, ya que pueden existir presentaciones más adecuadas para el paciente.</dd>
+    <dt>Sugerir una marca</dt>
+    <dd>Permite indicar una marca para el fármaco, si así lo justifica el tratamiento del paciente.</dd>
+    <dt>Cantidad</dt>
+    <dd>Cantidad de envases a recetar.</dd>
+    <dt>Signo +</dt>
+    <dd>Duplica el mismo fármaco para prescribir otra presentación. No permite cargar el mismo fármaco con igual presentación dos veces.</dd>
+    <dt>Icono de papelera</dt>
+    <dd>Elimina un fármaco de la receta, en caso de que no sea necesario incorporarlo en esa prescripción.</dd>
+  </dl>
+
+  <div class="nota">
+    <b>Si cargás una presentación distinta a la del plan</b>
+    <p>El sistema muestra un mensaje de alerta, para permitir una instancia de
+    revisión antes de continuar.</p>
+  </div>
+
+  ${cap("receta-alerta-presentacion.png","Mensaje de alerta por diferencia de presentación")}
+
+  ${cap("receta-digital.png","Pantalla de generación de la receta digital")}
+
+  <h2>Cómo llega la receta</h2>
+  <p>La receta se genera al validar la consulta y se envía de forma automática
+  al paciente y a la ART. Dependiendo del paciente, la medicación puede ser
+  entregada a domicilio o adquirida en farmacias.</p>
+  `
+}
+];
+
+const nav = document.getElementById("nav");
+const q = document.getElementById("q");
+const cont = document.getElementById("pagina");
+
+function pintarIndice(filtro){
+  const f = (filtro||"").trim().toLowerCase();
+  const vistas = PAGINAS.filter(p =>
+    !f || (p.titulo + " " + p.claves).toLowerCase().includes(f)
+  );
+  nav.innerHTML = "";
+  if(!vistas.length){
+    nav.innerHTML = '<p class="empty">Sin resultados en la guía.</p>';
+    return;
+  }
+  const actual = rutaActual();
+  let grupo = null;
+  vistas.forEach(p => {
+    if(p.grupo !== grupo){
+      grupo = p.grupo;
+      const h = document.createElement("h2");
+      h.textContent = grupo;
+      nav.appendChild(h);
+    }
+    const a = document.createElement("a");
+    a.href = "#/" + p.id;
+    a.innerHTML = '<i>' + p.num + '</i><span>' + p.titulo + '</span>';
+    if(p.id === actual) a.setAttribute("aria-current","true");
+    nav.appendChild(a);
+  });
+}
+
+function rutaActual(){
+  const id = location.hash.replace(/^#\/?/, "");
+  return PAGINAS.some(p => p.id === id) ? id : PAGINAS[0].id;
+}
+
+/* Reemplaza el marcador por la imagen cuando el archivo existe en capturas/ */
+function cargarCapturas(){
+  cont.querySelectorAll("[data-src]").forEach(caja => {
+    const img = new Image();
+    img.onload = () => {
+      img.alt = caja.getAttribute("data-alt") || "";
+      caja.className = "captura-lista";
+      caja.innerHTML = "";
+      caja.appendChild(img);
+    };
+    img.src = caja.getAttribute("data-src");
+  });
+}
+
+function pintarPagina(){
+  const p = PAGINAS.find(x => x.id === rutaActual());
+  cont.innerHTML =
+    '<div class="num">' + p.num + ' · ' + p.grupo + '</div>' +
+    '<h1>' + p.titulo + '</h1>' +
+    p.cuerpo +
+    '<footer class="rev">Última revisión: ' + REV + '</footer>';
+  document.title = p.titulo + " · Guía del profesional Red CEPT";
+  cargarCapturas();
+  pintarIndice(q.value);
+  window.scrollTo(0,0);
+}
+
+q.addEventListener("input", () => pintarIndice(q.value));
+window.addEventListener("hashchange", pintarPagina);
+
+const rail = document.getElementById("rail");
+const toggle = document.getElementById("toggle");
+toggle.addEventListener("click", () => {
+  const abierto = rail.classList.toggle("open");
+  toggle.setAttribute("aria-expanded", String(abierto));
+  toggle.textContent = abierto ? "Ocultar el índice" : "Ver el índice";
+});
+nav.addEventListener("click", e => {
+  if(e.target.closest("a") && window.innerWidth <= 900){
+    rail.classList.remove("open");
+    toggle.setAttribute("aria-expanded","false");
+    toggle.textContent = "Ver el índice";
+  }
+});
+
+pintarPagina();
+</script>
+</body>
+</html>
